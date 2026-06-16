@@ -134,9 +134,6 @@ export const drivers = [
   {rank: 1, name: "Ahmad Rizki", zone: "Surabaya", deliveries: 1284, onTime: 99.1, rating: 4.97, change: 2,},
   {rank: 2, name: "Budi Santoso", zone: "Jakarta", deliveries: 1211, onTime: 98.4, rating: 4.95, change: 0,},
   {rank: 3, name: "Dimas Pratama", zone: "Bandung", deliveries: 1188, onTime: 98.0, rating: 4.93, change: 3,},
-  {rank: 4, name: "Rina Putri", zone: "Malang", deliveries: 1102, onTime: 97.2, rating: 4.90, change: -1,},
-  {rank: 5, name: "Fajar Nugroho", zone: "Yogyakarta", deliveries: 1067, onTime: 96.8, rating: 4.88, change: 1,},
-  {rank: 6, name: "Siti Aulia", zone: "Semarang", deliveries: 1003, onTime: 96.1, rating: 4.85, change: -2,},
 ]
 
 export const partners = [
