@@ -50,7 +50,7 @@ export function Sidebar({
 
       <nav className="flex-1 overflow-y-auto px-3 py-4">
         <p className="px-3 pb-2 text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
-          Menu Utama
+          Navigation
         </p>
         <ul className="flex flex-col gap-1">
           {navItems.map((item) => {

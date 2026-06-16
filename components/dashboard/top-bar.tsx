@@ -40,6 +40,13 @@ function FilterSelect({
   )
 }
 
+const scrollToSection = (id: string) => {
+  document.getElementById(id)?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  })
+}
+
 export function TopBar({
   scope,
   setScope,
@@ -53,7 +60,33 @@ export function TopBar({
 }) {
   return (
     <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
-      <div className="flex h-16 items-center gap-3 px-4 md:px-6">
+      <div className="flex h-16 items-center gap-6 px-4 md:px-6">
+        <div className="hidden lg:flex items-center gap-6">
+          <h1 className="text-lg font-semibold text-white">
+            SmartLaundry
+          </h1>
+
+          <button
+            onClick={() => scrollToSection("overview")}
+            className="text-sm text-white font-medium"
+          >
+            Dashboard
+          </button>
+
+          <button
+            onClick={() => scrollToSection("revenue")}
+            className="text-sm text-slate-400 hover:text-white transition-colors"
+          >
+             Analytics
+          </button>
+
+          <button
+            onClick={() => scrollToSection("drivers")}
+            className="text-sm text-slate-400 hover:text-white transition-colors"
+          >
+            Operations
+          </button>
+        </div>
         <div className="relative hidden md:block w-72">
           <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
           <input

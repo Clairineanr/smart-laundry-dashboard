@@ -145,14 +145,9 @@ export const partners = [
 ]
 
 export const navItems = [
-  { id: "overview", label: "Ringkasan Eksekutif", icon: "LayoutDashboard" },
-  { id: "orders", label: "Analisis Pesanan", icon: "TrendingUp" },
-  { id: "revenue", label: "Analisis Pendapatan", icon: "TrendingUp" },
-  { id: "customers", label: "Analisis Pelanggan", icon: "Users" },
-  { id: "forecast", label: "Prediksi Permintaan", icon: "Activity" },
-  { id: "drivers", label: "Performa Driver", icon: "Navigation" },
-  { id: "partners", label: "Mitra Laundry", icon: "Building2" },
-  { id: "operations", label: "Operasional", icon: "Truck" },
+  { id: "overview", label: "Dashboard", icon: "LayoutDashboard" },
+  { id: "revenue", label: "Analytics", icon: "TrendingUp" },
+  { id: "drivers", label: "Operations", icon: "Truck" },
 ]
 
 export const filterScopes = [

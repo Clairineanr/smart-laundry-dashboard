@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Sidebar } from "@/components/dashboard/sidebar"
 import { TopBar } from "@/components/dashboard/top-bar"
 import { KpiCards } from "@/components/dashboard/kpi-cards"
 import { AiInsights } from "@/components/dashboard/ai-insights"
@@ -19,7 +18,6 @@ export default function SmartLaundryDashboard() {
 
   return (
     <div className="flex min-h-screen bg-background text-foreground">
-      <Sidebar active={active} onSelect={setActive} />
 
       <div className="relative flex min-w-0 flex-1 flex-col">
         <div
