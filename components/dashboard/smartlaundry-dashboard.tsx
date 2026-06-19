@@ -56,58 +56,58 @@ export default function SmartLaundryDashboard() {
 
           {/* HERO CARDS */}
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <div className="relative overflow-hidden rounded-2xl border border-blue-500/20 bg-gradient-to-br from-blue-500/10 to-transparent p-5">
-              <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-blue-500/10 blur-3xl" />
-
-              <p className="text-xs uppercase tracking-wider text-slate-400">
+            <div className="rounded-2xl border border-blue-200 bg-gradient-to-br from-blue-50 to-white p-5 shadow-sm">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">
                 Weekly Growth
               </p>
 
-              <h3 className="mt-3 text-3xl font-bold text-white">+18%</h3>
+              <h3 className="mt-3 text-3xl font-bold text-blue-600">
+                +18%
+              </h3>
 
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Orders meningkat dibanding minggu lalu
               </p>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-orange-500/20 bg-gradient-to-br from-orange-500/10 to-transparent p-5">
-              <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-orange-500/10 blur-3xl" />
-
-              <p className="text-xs uppercase tracking-wider text-slate-400">
+            <div className="rounded-2xl border border-sky-200 bg-gradient-to-br from-sky-50 to-white p-5 shadow-sm">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">
                 Peak Demand
               </p>
 
-              <h3 className="mt-3 text-3xl font-bold text-white">18–20</h3>
+              <h3 className="mt-3 text-3xl font-bold text-sky-600">
+                18–20
+              </h3>
 
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Jam tersibuk setiap hari
               </p>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-green-500/20 bg-gradient-to-br from-green-500/10 to-transparent p-5">
-              <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-green-500/10 blur-3xl" />
-
-              <p className="text-xs uppercase tracking-wider text-slate-400">
+            <div className="rounded-2xl border border-emerald-200 bg-gradient-to-br from-emerald-50 to-white p-5 shadow-sm">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">
                 Express Service
               </p>
 
-              <h3 className="mt-3 text-3xl font-bold text-white">42%</h3>
+              <h3 className="mt-3 text-3xl font-bold text-emerald-600">
+                42%
+              </h3>
 
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Kontribusi terhadap total revenue
               </p>
             </div>
 
-            <div className="relative overflow-hidden rounded-2xl border border-pink-500/20 bg-gradient-to-br from-pink-500/10 to-transparent p-5">
-              <div className="absolute right-0 top-0 h-20 w-20 rounded-full bg-pink-500/10 blur-3xl" />
-
-              <p className="text-xs uppercase tracking-wider text-slate-400">
+            <div className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-50 to-white p-5 shadow-sm">
+              <p className="text-xs uppercase tracking-wider text-muted-foreground">
                 Loyal Customers
               </p>
 
-              <h3 className="mt-3 text-3xl font-bold text-white">64%</h3>
+              <h3 className="mt-3 text-3xl font-bold text-indigo-600">
+                64%
+              </h3>
 
-              <p className="mt-2 text-sm text-slate-400">
+              <p className="mt-2 text-sm text-muted-foreground">
                 Revenue berasal dari pelanggan loyal
               </p>
             </div>
@@ -116,47 +116,47 @@ export default function SmartLaundryDashboard() {
           <section id="overview">
             <KpiCards />
           </section>
-
+          
           <section id="revenue">
             <div className="grid grid-cols-1 gap-5 xl:grid-cols-5">
               <div className="xl:col-span-3">
                 <RevenueAnalytics />
               </div>
-
+              
               <div className="xl:col-span-2">
                 <AiInsights />
               </div>
             </div>
           </section>
-
+          
           <section id="customer">
             <CustomerIntelligence />
           </section>
-
+          
           <section id="forecast">
             <DemandForecast />
           </section>
-
+          
           <section id="drivers">
             <div className="grid grid-cols-1 gap-5 xl:grid-cols-3">
               <LogisticsMap />
               <DriverLeaderboard />
             </div>
           </section>
-
+          
           <section id="partners">
             <PartnerAnalytics />
-          </section>
-
-          <footer className="flex flex-col items-center justify-between gap-2 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row">
-            <p>
-              SmartLaundry Intelligence Platform — confidential operating data.
-            </p>
-
-            <p>Updated 2 min ago · All systems operational</p>
-          </footer>
-        </main>
-      </div>
-    </div>
-  )
-}
+            </section>
+            <footer className="flex flex-col items-center justify-between gap-2 border-t border-border pt-5 text-xs text-muted-foreground sm:flex-row">
+              <p> 
+                SmartLaundry Intelligence Platform — confidential operating data.
+              </p> 
+              
+              <p>Updated 2 min ago · All systems operational
+                </p>
+              </footer>
+            </main>
+          </div>
+        </div> 
+      )
+    } 
