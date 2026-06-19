@@ -62,27 +62,27 @@ export function TopBar({
     <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur-xl">
       <div className="flex h-16 items-center gap-6 px-4 md:px-6">
         <div className="hidden lg:flex items-center gap-6">
-          <h1 className="text-lg font-semibold text-white">
+          <h1 className="text-3xl font-semibold text-blue-700">
             SmartLaundry
           </h1>
 
           <button
             onClick={() => scrollToSection("overview")}
-            className="text-sm text-white font-medium"
+            className="text-xl text-blue-700 font-medium"
           >
             Dashboard
           </button>
 
           <button
             onClick={() => scrollToSection("revenue")}
-            className="text-sm text-slate-400 hover:text-white transition-colors"
+            className="text-sm text-slate-400 hover:text-blue-700 transition-colors"
           >
              Analytics
           </button>
 
           <button
             onClick={() => scrollToSection("drivers")}
-            className="text-sm text-slate-400 hover:text-white transition-colors"
+            className="text-sm text-slate-400 hover:text-blue-700 transition-colors"
           >
             Operations
           </button>
