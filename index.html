@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Laundry Express</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ROLE SELECTOR -->
+<div id="role-selector">
+  <div class="brand">
+    <div class="brand-icon">🧺</div>
+    <h1>Smart Laundry Express</h1>
+    <p>Cuci Kering Cepat • Selesai ±1 Jam</p>
+  </div>
+  <div class="role-grid">
+    <div class="role-card" onclick="openRole('customer')">
+      <div class="role-icon">👤</div>
+      <h3>Pengguna</h3>
+      <p>Pesan laundry online</p>
+    </div>
+    <div class="role-card" onclick="openRole('admin')">
+      <div class="role-icon">🛡️</div>
+      <h3>Admin</h3>
+      <p>Kelola sistem</p>
+    </div>
+    <div class="role-card" onclick="openRole('driver')">
+      <div class="role-icon">🛵</div>
+      <h3>Driver</h3>
+      <p>Pickup & delivery</p>
+    </div>
+    <div class="role-card" onclick="openRole('mitra')">
+      <div class="role-icon">🏪</div>
+      <h3>Mitra Laundry</h3>
+      <p>Proses cucian</p>
+    </div>
+  </div>
+</div>
+
+<!-- APP SHELL -->
+<div id="app">
+  <div class="app-header">
+    <button class="btn-back" onclick="goBack()">← Ganti</button>
+    <h2 id="app-title">Smart Laundry</h2>
+    <span class="role-badge" id="role-label">-</span>
+  </div>
+
+  <!-- CUSTOMER PAGES -->
+  <div id="customer-app" class="hidden">
+    <!-- HOME -->
+    <div id="cust-home" class="hidden">
+      <div class="page-content">
+        <div style="background:var(--blue);color:#fff;margin:-1rem -1rem 1rem;padding:1rem 1rem 1.5rem">
+          <div style="font-size:0.75rem;opacity:0.8">📍 Jl. Melati No. 10, Bandung</div>
+          <div style="font-size:1.1rem;font-weight:700;margin-top:0.2rem">Hai, Budi! 👋</div>
+          <div class="search-bar" style="margin-top:0.75rem;margin-bottom:0">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Cari laundry terdekat..." style="background:transparent">
+          </div>
+        </div>
+        <div class="promo-banner">
+          <div class="promo-text">
+            <h3>Cuci Kering Express</h3>
+            <p>Bersih, wangi, cepat selesai ±1 Jam</p>
+          </div>
+          <div class="promo-icon">👕</div>
+        </div>
+        <div class="quick-actions">
+          <div class="quick-action" onclick="showPage('cust-order')"><span class="qa-icon">🛵</span>Jemput & Antar</div>
+          <div class="quick-action"><span class="qa-icon">📱</span>QRIS Only</div>
+          <div class="quick-action"><span class="qa-icon">👚</span>1 Tabung</div>
+          <div class="quick-action"><span class="qa-icon">🧴</span>Sabun Sendiri</div>
+        </div>
+        <div class="row-between" style="margin-bottom:0.75rem">
+          <div class="section-title" style="margin:0">Laundry Terdekat</div>
+          <button class="text-link">Lihat Semua</button>
+        </div>
+        <div class="card" onclick="showPage('cust-detail')" style="cursor:pointer">
+          <div class="laundry-item">
+            <div class="laundry-thumb">🏪</div>
+            <div class="laundry-info">
+              <div class="laundry-name">Laundry Bersih Express</div>
+              <div class="laundry-meta"><span class="star">★</span>4.8 (320) • 1.2 km</div>
+              <div class="laundry-price">Rp20.000/tabung <span class="badge badge-blue">±1 Jam</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer">
+          <div class="laundry-item">
+            <div class="laundry-thumb">🧺</div>
+            <div class="laundry-info">
+              <div class="laundry-name">GoClean Laundry</div>
+              <div class="laundry-meta"><span class="star">★</span>4.7 (280) • 1.6 km</div>
+              <div class="laundry-price">Rp20.000/tabung <span class="badge badge-blue">±1 Jam</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="cursor:pointer">
+          <div class="laundry-item">
+            <div class="laundry-thumb">✨</div>
+            <div class="laundry-info">
+              <div class="laundry-name">Wangi Laundry</div>
+              <div class="laundry-meta"><span class="star">★</span>4.6 (210) • 2.1 km</div>
+              <div class="laundry-price">Rp20.000/tabung <span class="badge badge-blue">±1 Jam</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DETAIL LAUNDRY -->
+    <div id="cust-detail" class="hidden">
+      <div class="page-content">
+        <div style="background:var(--blue-light);border-radius:16px;height:140px;display:flex;align-items:center;justify-content:center;font-size:3rem;margin-bottom:1rem">🏪</div>
+        <div class="card">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between">
+            <div>
+              <h2 style="font-size:1.1rem;font-weight:700">Laundry Bersih Express</h2>
+              <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.2rem">📍 Jl. Sukajadi No. 123 • 1.2 km</div>
+              <div style="margin-top:0.4rem"><span class="star">★★★★★</span> <span style="font-size:0.8rem">4.8 (320 ulasan)</span></div>
+            </div>
+            <span class="badge badge-blue">±1 Jam</span>
+          </div>
+          <div class="divider"></div>
+          <div class="fee-row"><span>⏰ Jam Operasional</span><span style="font-weight:600">07.00 – 22.00</span></div>
+          <div class="fee-row"><span>📦 Layanan</span><span style="font-weight:600">Cuci Kering Express</span></div>
+          <div class="fee-row"><span>💰 Harga</span><span style="font-weight:600;color:var(--blue)">Rp20.000/tabung</span></div>
+          <div class="fee-row"><span>⚖️ Maks. Berat</span><span style="font-weight:600">8 kg</span></div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('cust-order')">Pesan Sekarang</button>
+      </div>
+    </div>
+
+    <!-- BUAT PESANAN -->
+    <div id="cust-order" class="hidden">
+      <div class="page-content">
+        <div class="card">
+          <div class="section-title">1. Alamat Pickup</div>
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div style="color:var(--blue);font-size:1.2rem">🏠</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem">Rumah</div>
+              <div style="font-size:0.78rem;color:var(--text-muted)">Jl. Sukajadi No. 123, Bandung</div>
+            </div>
+            <button class="text-link" style="margin-left:auto">Ubah</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">2. Metode Layanan</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem">
+            <label style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1.5px solid var(--blue);border-radius:10px;cursor:pointer;background:var(--blue-light)">
+              <input type="radio" name="method" checked> <span style="flex:1;font-size:0.87rem;font-weight:500">🛵 Pickup & Delivery</span>
+              <span style="font-size:0.75rem;color:var(--blue)">+Rp6.000</span>
+            </label>
+            <label style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1.5px solid var(--gray-border);border-radius:10px;cursor:pointer">
+              <input type="radio" name="method"> <span style="flex:1;font-size:0.87rem">🚶 Antar Sendiri</span>
+              <span style="font-size:0.75rem;color:var(--text-muted)">Gratis</span>
+            </label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">3. Layanan</div>
+          <label style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1.5px solid var(--blue);border-radius:10px;background:var(--blue-light)">
+            <input type="radio" name="service" checked>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:0.87rem">Cuci Kering Express</div>
+              <div style="font-size:0.73rem;color:var(--text-muted)">Bersih, wangi, cepat • ±1 Jam</div>
+            </div>
+            <span style="font-weight:700;color:var(--blue)">Rp20.000</span>
+          </label>
+        </div>
+        <div class="card">
+          <div class="section-title">4. Add-on</div>
+          <div style="display:flex;gap:0.5rem;flex-wrap:wrap">
+            <label style="display:flex;align-items:center;gap:0.4rem;padding:0.5rem 0.75rem;border:1.5px solid var(--blue);border-radius:20px;background:var(--blue-light);cursor:pointer;font-size:0.8rem">
+              <input type="checkbox" checked> 🧴 Sabun Laundry
+            </label>
+            <label style="display:flex;align-items:center;gap:0.4rem;padding:0.5rem 0.75rem;border:1.5px solid var(--blue);border-radius:20px;background:var(--blue-light);cursor:pointer;font-size:0.8rem">
+              <input type="checkbox" checked> 🌸 Pewangi +Rp2.000
+            </label>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Ringkasan Sementara</div>
+          <div class="fee-row"><span>Cuci Kering Express</span><span>Rp20.000</span></div>
+          <div class="fee-row"><span>Pickup & Delivery</span><span>Rp6.000</span></div>
+          <div class="fee-row"><span>Pewangi</span><span>Rp2.000</span></div>
+          <div class="fee-row total"><span>Subtotal</span><span style="color:var(--blue)">Rp28.000</span></div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('cust-checkout')">Lanjut ke Checkout</button>
+      </div>
+    </div>
+
+    <!-- CHECKOUT -->
+    <div id="cust-checkout" class="hidden">
+      <div class="page-content">
+        <div class="card">
+          <div class="card-title">Detail Pesanan</div>
+          <div style="margin-top:0.75rem">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.75rem">
+              <div style="font-size:1.3rem">🏪</div>
+              <div>
+                <div style="font-weight:600;font-size:0.88rem">Laundry Bersih Express</div>
+                <div style="font-size:0.75rem;color:var(--text-muted)">Jl. Sukajadi No. 123</div>
+              </div>
+            </div>
+            <div class="fee-row"><span style="color:var(--text-muted)">⏰ Estimasi Pickup</span><span>Hari ini, 14.00–16.00</span></div>
+            <div class="fee-row"><span style="color:var(--text-muted)">✅ Estimasi Selesai</span><span>Selasa, 21 Mei 13.00</span></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Rincian Biaya</div>
+          <div style="margin-top:0.75rem">
+            <div class="fee-row"><span>Cuci Kering Express (8 kg)</span><span>Rp20.000</span></div>
+            <div class="fee-row"><span>Ongkir Pickup</span><span>Rp10.000</span></div>
+            <div class="fee-row"><span>Ongkir Delivery</span><span>Rp10.000</span></div>
+            <div class="fee-row"><span>Pewangi Premium</span><span>Rp5.000</span></div>
+            <div class="fee-row"><span>Biaya Layanan</span><span>Rp2.000</span></div>
+            <div class="fee-row total"><span>Total Pembayaran</span><span style="color:var(--blue)">Rp47.000</span></div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('cust-payment')">📱 Bayar dengan QRIS</button>
+      </div>
+    </div>
+
+    <!-- PAYMENT -->
+    <div id="cust-payment" class="hidden">
+      <div class="page-content">
+        <div class="card" style="text-align:center">
+          <div style="font-size:0.85rem;color:var(--text-muted)">Total Pembayaran</div>
+          <div style="font-size:2rem;font-weight:700;color:var(--blue);margin:0.3rem 0">Rp47.000</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)">Selesaikan pembayaran dalam</div>
+          <div style="font-size:1.8rem;font-weight:700;color:var(--orange);margin:0.3rem 0" id="timer">14 : 58</div>
+          <div style="margin:1rem 0;font-size:0.85rem;color:var(--text-muted)">Scan kode QRIS di bawah ini</div>
+          <div style="background:var(--gray-light);border-radius:12px;padding:1rem;margin:0 auto;width:160px;height:160px;display:flex;align-items:center;justify-content:center;font-size:4rem">📷</div>
+          <button class="btn btn-outline" style="margin-top:1rem">📋 Salin Kode QRIS</button>
+          <div class="divider"></div>
+          <div style="text-align:left;font-size:0.8rem;color:var(--text-muted)">
+            <div style="font-weight:600;margin-bottom:0.4rem">Cara Pembayaran:</div>
+            <div>1. Buka aplikasi e-wallet atau mobile banking</div>
+            <div style="margin-top:0.2rem">2. Pilih menu QRIS</div>
+            <div style="margin-top:0.2rem">3. Scan kode QR lalu selesaikan pembayaran</div>
+          </div>
+        </div>
+        <button class="btn btn-green" onclick="showPage('cust-success')">✅ Simulasi Bayar Berhasil</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS -->
+    <div id="cust-success" class="hidden">
+      <div class="page-content" style="text-align:center;padding-top:2rem">
+        <div style="font-size:5rem;margin-bottom:1rem">✅</div>
+        <h2 style="font-size:1.3rem;font-weight:700;color:var(--green)">Pembayaran Berhasil!</h2>
+        <p style="color:var(--text-muted);font-size:0.85rem;margin-top:0.4rem">Terima kasih! Pesanan Anda sedang diproses.</p>
+        <div class="card" style="text-align:left;margin-top:1.5rem">
+          <div class="fee-row"><span>Nomor Pesanan</span><span style="font-weight:700;color:var(--blue)">SLX240521-000123</span></div>
+          <div class="fee-row"><span>Total Pembayaran</span><span style="font-weight:700">Rp47.000</span></div>
+          <div class="fee-row"><span>Status</span><span class="badge badge-orange">Menunggu Pickup</span></div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('cust-tracking')">🔍 Lacak Pesanan</button>
+        <button class="btn btn-outline" onclick="showCustPage('home')">Kembali ke Home</button>
+      </div>
+    </div>
+
+    <!-- TRACKING -->
+    <div id="cust-tracking" class="hidden">
+      <div class="page-content">
+        <div class="card">
+          <div class="row-between">
+            <div class="card-title">SLX240521-000123</div>
+            <span class="badge badge-orange">Sedang Dicuci</span>
+          </div>
+          <div class="map-placeholder" style="margin-top:0.75rem">
+            <div class="map-grid" style="background-image:repeating-linear-gradient(0deg,#1a56db 0,#1a56db 1px,transparent 0,transparent 30px),repeating-linear-gradient(90deg,#1a56db 0,#1a56db 1px,transparent 0,transparent 30px)"></div>
+            <div style="position:relative;text-align:center">
+              <div style="font-size:2rem">🛵</div>
+              <div>Kurir dalam perjalanan ke laundry</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:0.75rem;align-items:center;background:var(--gray-light);border-radius:10px;padding:0.75rem">
+            <div class="avatar">BS</div>
+            <div style="flex:1">
+              <div style="font-weight:600;font-size:0.87rem">Budi Santoso ⭐ 4.9</div>
+              <div style="font-size:0.73rem;color:var(--text-muted)">Kurir ID: KR-1023</div>
+            </div>
+            <button class="btn btn-primary btn-sm" onclick="showPage('cust-chat')">💬 Chat</button>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">Status Pesanan</div>
+          <div class="status-track" style="margin-top:1rem">
+            <div class="status-step">
+              <div class="step-dot done"></div>
+              <div class="step-line done"></div>
+              <div class="step-text">
+                <div class="step-label">Pesanan Dibuat</div>
+                <div class="step-time">1 Mei 2025 • 09:41</div>
+              </div>
+            </div>
+            <div class="status-step">
+              <div class="step-dot done"></div>
+              <div class="step-line done"></div>
+              <div class="step-text">
+                <div class="step-label">Kurir Menjemput</div>
+                <div class="step-time">1 Mei 2025 • 10:05</div>
+              </div>
+            </div>
+            <div class="status-step">
+              <div class="step-dot done"></div>
+              <div class="step-line done"></div>
+              <div class="step-text">
+                <div class="step-label">Pakaian Diterima Laundry</div>
+                <div class="step-time">1 Mei 2025 • 10:22</div>
+              </div>
+            </div>
+            <div class="status-step">
+              <div class="step-dot active"></div>
+              <div class="step-line"></div>
+              <div class="step-text">
+                <div class="step-label" style="color:var(--blue);font-weight:600">Sedang Diproses</div>
+                <div class="step-time">Sedang dicuci...</div>
+              </div>
+            </div>
+            <div class="status-step">
+              <div class="step-dot pending"></div>
+              <div class="step-text">
+                <div class="step-label" style="color:var(--text-muted)">Selesai</div>
+                <div class="step-time">Menunggu pengantaran</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CHAT -->
+    <div id="cust-chat" class="hidden">
+      <div class="page-content">
+        <div style="display:flex;align-items:center;gap:0.75rem;background:#fff;border-radius:12px;padding:0.75rem;margin-bottom:1rem">
+          <div class="avatar">BS</div>
+          <div>
+            <div style="font-weight:600">Budi Santoso</div>
+            <div style="font-size:0.75rem;color:var(--green)">● Online • Kurir</div>
+          </div>
+          <button style="margin-left:auto;background:var(--blue-light);color:var(--blue);border:none;border-radius:8px;padding:0.4rem 0.75rem;cursor:pointer;font-size:0.8rem">📞 Telepon</button>
+        </div>
+        <div class="chat-messages">
+          <div class="msg-in">
+            <div>Halo, saya Rudi kurir Anda. Saya sudah tiba di lokasi.</div>
+            <div class="msg-time">09:41</div>
+          </div>
+          <div class="msg-out">
+            <div>Halo, saya segera keluar.</div>
+            <div class="msg-time">09:42 ✓✓</div>
+          </div>
+          <div class="msg-in">
+            <div>Oke siap! 😊 Mohon ditunggu sebentar ya.</div>
+            <div class="msg-time">09:42</div>
+          </div>
+          <div class="msg-out">
+            <div>Terima kasih!</div>
+            <div class="msg-time">09:43 ✓✓</div>
+          </div>
+        </div>
+        <div class="chat-input-row">
+          <input type="text" placeholder="Ketik pesan..." id="chat-input-cust">
+          <button class="send-btn" onclick="sendChatMsg('cust')">➤</button>
+        </div>
+        <div style="display:flex;gap:0.5rem;margin-top:0.75rem;flex-wrap:wrap">
+          <button onclick="quickMsg('cust','Saya sudah di depan')" style="font-size:0.72rem;padding:0.35rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;background:#fff;cursor:pointer">Saya sudah di depan</button>
+          <button onclick="quickMsg('cust','Berapa lama lagi?')" style="font-size:0.72rem;padding:0.35rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;background:#fff;cursor:pointer">Berapa lama lagi?</button>
+          <button onclick="quickMsg('cust','Terima kasih!')" style="font-size:0.72rem;padding:0.35rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;background:#fff;cursor:pointer">Terima kasih!</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PESANAN PAGE -->
+    <div id="cust-orders" class="hidden">
+      <div class="page-content">
+        <div class="section-title">Pesanan Aktif</div>
+        <div class="card" onclick="showPage('cust-tracking')" style="cursor:pointer">
+          <div class="row-between">
+            <span class="badge badge-orange">Menunggu Pickup</span>
+            <span style="font-size:0.75rem;color:var(--text-muted)">SLX240521-000123</span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center">
+            <div style="font-size:1.8rem">🏪</div>
+            <div>
+              <div style="font-weight:600;font-size:0.88rem">Laundry Bersih Express</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">1 Tabung (8 kg) • Cuci Kering</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">⏰ Pickup: Hari ini, 14.00-16.00</div>
+            </div>
+          </div>
+        </div>
+        <div class="card" style="opacity:0.7">
+          <div class="row-between">
+            <span class="badge badge-blue">Sedang Diproses</span>
+            <span style="font-size:0.75rem;color:var(--text-muted)">SLX240519-000122</span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center">
+            <div style="font-size:1.8rem">✨</div>
+            <div>
+              <div style="font-weight:600;font-size:0.88rem">Wangi Laundry</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">2 Tabung (16 kg) • Cuci Kering</div>
+            </div>
+          </div>
+        </div>
+        <div class="section-title" style="margin-top:0.5rem">Selesai</div>
+        <div class="card">
+          <div class="row-between">
+            <span class="badge badge-green">Selesai</span>
+            <span style="font-size:0.75rem;color:var(--text-muted)">12 Mei 2024</span>
+          </div>
+          <div style="margin-top:0.75rem;display:flex;gap:0.75rem;align-items:center;justify-content:space-between">
+            <div style="display:flex;gap:0.75rem;align-items:center">
+              <div style="font-size:1.8rem">🏪</div>
+              <div>
+                <div style="font-weight:600;font-size:0.88rem">Laundry Bersih Express</div>
+                <div style="font-size:0.75rem;color:var(--text-muted)">Rp20.000</div>
+              </div>
+            </div>
+            <button class="btn btn-primary btn-sm">Pesan Lagi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HISTORY / RATING -->
+    <div id="cust-rating" class="hidden">
+      <div class="page-content">
+        <div class="card">
+          <div class="card-title">Beri Rating & Review</div>
+          <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.3rem">Pesanan #SLX123456 • Cuci Kering Express</div>
+          <div class="divider"></div>
+          <div style="font-weight:600;font-size:0.87rem">Rating Laundry</div>
+          <div style="font-size:0.78rem;color:var(--text-muted)">Smart Laundry Express - Melati No. 10</div>
+          <div class="rating-stars" id="stars-laundry">
+            <span onclick="setRating('laundry',1)" class="filled">★</span>
+            <span onclick="setRating('laundry',2)" class="filled">★</span>
+            <span onclick="setRating('laundry',3)" class="filled">★</span>
+            <span onclick="setRating('laundry',4)" class="filled">★</span>
+            <span onclick="setRating('laundry',5)" class="filled">★</span>
+          </div>
+          <div style="font-weight:600;font-size:0.87rem;margin-top:0.75rem">Rating Kurir</div>
+          <div style="font-size:0.78rem;color:var(--text-muted)">Rudi Setiawan</div>
+          <div class="rating-stars" id="stars-kurir">
+            <span onclick="setRating('kurir',1)" class="filled">★</span>
+            <span onclick="setRating('kurir',2)" class="filled">★</span>
+            <span onclick="setRating('kurir',3)" class="filled">★</span>
+            <span onclick="setRating('kurir',4)" class="filled">★</span>
+            <span onclick="setRating('kurir',5)">★</span>
+          </div>
+          <div style="font-weight:600;font-size:0.87rem;margin-top:0.75rem">Tulis Review (Opsional)</div>
+          <textarea class="form-input" style="height:80px;margin-top:0.4rem;resize:none" placeholder="Bagaimana pengalaman Anda?">Pelayanan cepat, ramah, dan cucian bersih wangi. Terima kasih!</textarea>
+          <div style="display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.5rem">
+            <span style="padding:0.3rem 0.7rem;border:1px solid var(--blue);color:var(--blue);border-radius:20px;font-size:0.75rem;cursor:pointer;background:var(--blue-light)">Cepat</span>
+            <span style="padding:0.3rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;font-size:0.75rem;cursor:pointer">Ramah</span>
+            <span style="padding:0.3rem 0.7rem;border:1px solid var(--blue);color:var(--blue);border-radius:20px;font-size:0.75rem;cursor:pointer;background:var(--blue-light)">Bersih</span>
+            <span style="padding:0.3rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;font-size:0.75rem;cursor:pointer">Wangi</span>
+            <span style="padding:0.3rem 0.7rem;border:1px solid var(--gray-border);border-radius:20px;font-size:0.75rem;cursor:pointer">Rapi</span>
+          </div>
+          <button class="btn btn-primary" onclick="showToast('Review berhasil dikirim! 🌟')">Kirim Review</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROFIL -->
+    <div id="cust-profile" class="hidden">
+      <div class="page-content">
+        <div class="card" style="text-align:center">
+          <div class="avatar" style="width:72px;height:72px;font-size:1.5rem;margin:0 auto 0.75rem">BS</div>
+          <div style="font-weight:700;font-size:1.1rem">Budi Santoso</div>
+          <div style="font-size:0.82rem;color:var(--text-muted)">budi@email.com • 0812-3456-7890</div>
+          <button class="btn btn-outline btn-sm" style="width:auto;margin-top:0.5rem">✏️ Edit Profil</button>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:0.75rem">Pengaturan</div>
+          <div class="fee-row" style="cursor:pointer"><span>🔔 Notifikasi Pesanan</span><label class="toggle-switch"><input type="checkbox" checked><span class="toggle-slider"></span></label></div>
+          <div class="fee-row" style="cursor:pointer"><span>📍 Daftar Alamat</span><span style="color:var(--text-muted)">›</span></div>
+          <div class="fee-row" style="cursor:pointer"><span>🔒 Ubah Password</span><span style="color:var(--text-muted)">›</span></div>
+          <div class="fee-row" style="cursor:pointer"><span>❓ Bantuan</span><span style="color:var(--text-muted)">›</span></div>
+          <div class="fee-row" style="cursor:pointer;color:var(--red)" onclick="goBack()"><span>🚪 Logout</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM NAV CUSTOMER -->
+    <div class="bottom-nav" id="cust-nav">
+      <button class="nav-item active" id="nav-home" onclick="showCustPage('home')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg>
+        Home
+      </button>
+      <button class="nav-item" id="nav-orders" onclick="showCustPage('orders')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        Pesanan
+      </button>
+      <button class="nav-item" id="nav-rating" onclick="showCustPage('rating')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+        Riwayat
+      </button>
+      <button class="nav-item" id="nav-profile" onclick="showCustPage('profile')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Profil
+      </button>
+    </div>
+  </div>
+
+  <!-- ADMIN PAGES -->
+  <div id="admin-app" class="hidden">
+    <div id="admin-dashboard" class="hidden">
+      <div class="page-content">
+        <div style="display:flex;gap:0.5rem;overflow-x:auto;padding-bottom:0.5rem;margin-bottom:1rem;-webkit-overflow-scrolling:touch">
+          <button onclick="showAdminPage('dashboard')" id="atab-dashboard" class="btn btn-primary btn-sm" style="white-space:nowrap;margin-top:0">Dashboard</button>
+          <button onclick="showAdminPage('pengguna')" id="atab-pengguna" class="btn btn-outline btn-sm" style="white-space:nowrap;margin-top:0">Pengguna</button>
+          <button onclick="showAdminPage('pesanan')" id="atab-pesanan" class="btn btn-outline btn-sm" style="white-space:nowrap;margin-top:0">Pesanan</button>
+          <button onclick="showAdminPage('komplain')" id="atab-komplain" class="btn btn-outline btn-sm" style="white-space:nowrap;margin-top:0">Komplain</button>
+          <button onclick="showAdminPage('laporan')" id="atab-laporan" class="btn btn-outline btn-sm" style="white-space:nowrap;margin-top:0">Laporan</button>
+        </div>
+
+        <div id="admin-content-dashboard">
+          <div class="stats-grid">
+            <div class="stat-card"><div class="stat-num">1,245</div><div class="stat-label">Total Pengguna</div><div class="stat-change">▲ +12.5%</div></div>
+            <div class="stat-card"><div class="stat-num">128</div><div class="stat-label">Total Laundry</div><div class="stat-change">▲ +8.3%</div></div>
+            <div class="stat-card"><div class="stat-num">256</div><div class="stat-label">Total Driver</div><div class="stat-change">▲ +15.2%</div></div>
+            <div class="stat-card"><div class="stat-num">3,892</div><div class="stat-label">Total Pesanan</div><div class="stat-change">▲ +18.7%</div></div>
+          </div>
+          <div class="card">
+            <div class="row-between"><div class="card-title">Grafik Pesanan</div><span style="font-size:0.75rem;color:var(--text-muted)">Per Hari</span></div>
+            <div class="bar-chart" style="margin-top:1rem">
+              <div class="bar" style="height:45%"><span class="bar-label">1 Mei</span></div>
+              <div class="bar" style="height:60%"><span class="bar-label">8 Mei</span></div>
+              <div class="bar" style="height:55%"><span class="bar-label">15 Mei</span></div>
+              <div class="bar active-bar" style="height:85%"><span class="bar-label">22 Mei</span></div>
+              <div class="bar" style="height:70%"><span class="bar-label">29 Mei</span></div>
+              <div class="bar" style="height:90%"><span class="bar-label">31 Mei</span></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-title">Pesanan Terbaru</div>
+            <table class="mini-table" style="margin-top:0.75rem">
+              <tr><th>No. Pesanan</th><th>Pelanggan</th><th>Status</th></tr>
+              <tr><td style="color:var(--blue)">#SLX-001</td><td>Rina Andini</td><td><span class="badge badge-orange">Baru</span></td></tr>
+              <tr><td style="color:var(--blue)">#SLX-002</td><td>Dedi K.</td><td><span class="badge badge-blue">Diproses</span></td></tr>
+              <tr><td style="color:var(--blue)">#SLX-003</td><td>Siti Aisyah</td><td><span class="badge badge-green">Selesai</span></td></tr>
+            </table>
+          </div>
+          <div class="card">
+            <div class="row-between"><div class="card-title">Pembayaran QRIS</div></div>
+            <div class="stats-grid" style="margin-top:0.75rem;margin-bottom:0">
+              <div class="stat-card"><div class="stat-num" style="font-size:1.2rem">2,945</div><div class="stat-label">Total Transaksi</div></div>
+              <div class="stat-card"><div class="stat-num" style="font-size:1.1rem;color:var(--green)">2,812</div><div class="stat-label">Berhasil</div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-content-pengguna" class="hidden">
+          <div class="card">
+            <div class="search-bar" style="margin-bottom:0.75rem"><span>🔍</span><input type="text" placeholder="Cari pengguna..."></div>
+            <table class="mini-table">
+              <tr><th>Nama</th><th>Status</th><th>Aksi</th></tr>
+              <tr><td><b>Rina Andini</b><br><span style="font-size:0.7rem;color:var(--text-muted)">rina@email.com</span></td><td><span class="badge badge-green">Aktif</span></td><td><button class="btn btn-sm btn-outline" style="font-size:0.68rem;padding:0.25rem 0.5rem">Kelola</button></td></tr>
+              <tr><td><b>Dedi Kurniawan</b><br><span style="font-size:0.7rem;color:var(--text-muted)">dedi@email.com</span></td><td><span class="badge badge-green">Aktif</span></td><td><button class="btn btn-sm btn-outline" style="font-size:0.68rem;padding:0.25rem 0.5rem">Kelola</button></td></tr>
+              <tr><td><b>Siti Aisyah</b><br><span style="font-size:0.7rem;color:var(--text-muted)">siti@email.com</span></td><td><span class="badge badge-red">Nonaktif</span></td><td><button class="btn btn-sm btn-outline" style="font-size:0.68rem;padding:0.25rem 0.5rem">Aktifkan</button></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div id="admin-content-pesanan" class="hidden">
+          <div class="card">
+            <div class="row-between" style="margin-bottom:0.75rem"><div class="card-title">Semua Pesanan</div><span class="badge badge-blue">3,892 total</span></div>
+            <div style="display:flex;gap:0.4rem;flex-wrap:wrap;margin-bottom:0.75rem">
+              <span class="badge badge-blue" style="cursor:pointer">Semua</span>
+              <span class="badge badge-orange" style="cursor:pointer">Diproses</span>
+              <span class="badge badge-yellow" style="cursor:pointer">Pickup</span>
+              <span class="badge badge-green" style="cursor:pointer">Selesai</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.75rem">
+              <div style="background:var(--gray-light);border-radius:10px;padding:0.75rem">
+                <div class="row-between"><span style="font-weight:600;font-size:0.85rem">#SLX-250501-001</span><span class="badge badge-orange">Diproses</span></div>
+                <div style="font-size:0.78rem;margin-top:0.3rem">Rina Andini • Smart Laundry • Rp45.000</div>
+              </div>
+              <div style="background:var(--gray-light);border-radius:10px;padding:0.75rem">
+                <div class="row-between"><span style="font-weight:600;font-size:0.85rem">#SLX-250501-002</span><span class="badge badge-blue">Pickup</span></div>
+                <div style="font-size:0.78rem;margin-top:0.3rem">Dedi K. • Wangi Laundry • Rp78.000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-content-komplain" class="hidden">
+          <div class="card">
+            <div class="card-title" style="margin-bottom:0.75rem">Komplain Terbaru</div>
+            <div style="display:flex;flex-direction:column;gap:0.75rem">
+              <div style="background:var(--red-light);border-radius:10px;padding:0.75rem">
+                <div class="row-between"><span style="font-weight:600;font-size:0.82rem">#KMP-001 • Rina Andini</span><span class="badge badge-red">Baru</span></div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Pakaian Rusak</div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('Komplain diproses')" style="margin-top:0.5rem">Proses</button>
+              </div>
+              <div style="background:var(--yellow-light);border-radius:10px;padding:0.75rem">
+                <div class="row-between"><span style="font-weight:600;font-size:0.82rem">#KMP-002 • Dedi K.</span><span class="badge badge-yellow">Diproses</span></div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Pesanan Terlambat</div>
+              </div>
+              <div style="background:var(--green-light);border-radius:10px;padding:0.75rem">
+                <div class="row-between"><span style="font-weight:600;font-size:0.82rem">#KMP-003 • Siti A.</span><span class="badge badge-green">Selesai</span></div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.2rem">Lainnya</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="admin-content-laporan" class="hidden">
+          <div class="card">
+            <div class="card-title">Laporan Bulanan</div>
+            <div class="stats-grid" style="margin-top:0.75rem">
+              <div class="stat-card"><div class="stat-num" style="font-size:1.1rem">Rp245Jt</div><div class="stat-label">Total Pendapatan</div></div>
+              <div class="stat-card"><div class="stat-num">4.6</div><div class="stat-label">Rata-rata Rating ⭐</div></div>
+            </div>
+            <div style="margin-top:0.75rem">
+              <div class="fee-row"><span>Laundry terlaris</span><span style="font-weight:600">Smart Laundry</span></div>
+              <div class="fee-row"><span>Layanan favorit</span><span style="font-weight:600">Cuci Kering Express</span></div>
+              <div class="fee-row"><span>Total komplain</span><span style="font-weight:600;color:var(--red)">47</span></div>
+            </div>
+            <button class="btn btn-outline" onclick="showToast('Laporan didownload!')">📥 Unduh Laporan CSV</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-item active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item" onclick="showToast('Fitur Laundry')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        Laundry
+      </button>
+      <button class="nav-item" onclick="showToast('Fitur Driver')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83"/></svg>
+        Driver
+      </button>
+      <button class="nav-item" onclick="showToast('Fitur Pengaturan')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4"/></svg>
+        Pengaturan
+      </button>
+    </div>
+  </div>
+
+  <!-- DRIVER PAGES -->
+  <div id="driver-app" class="hidden">
+    <div id="driver-dashboard" class="hidden">
+      <div class="page-content">
+        <div class="card" style="background:linear-gradient(135deg,var(--blue),var(--blue-mid));color:#fff">
+          <div class="row-between">
+            <div>
+              <div style="font-size:0.8rem;opacity:0.8">Selamat pagi,</div>
+              <div style="font-size:1.2rem;font-weight:700">Driver Budi 🛵</div>
+            </div>
+            <label class="toggle-switch" style="transform:scale(1.1)"><input type="checkbox" checked><span class="toggle-slider"></span></label>
+          </div>
+          <div style="font-size:0.75rem;margin-top:0.3rem;opacity:0.8">Status: ● Online</div>
+          <div style="background:rgba(255,255,255,0.2);border-radius:12px;padding:0.75rem;margin-top:1rem;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.5rem;text-align:center">
+            <div><div style="font-size:1.3rem;font-weight:700">8</div><div style="font-size:0.65rem;opacity:0.8">Tugas Diterima</div></div>
+            <div><div style="font-size:1.3rem;font-weight:700">6</div><div style="font-size:0.65rem;opacity:0.8">Selesai</div></div>
+            <div><div style="font-size:1.3rem;font-weight:700">Rp180rb</div><div style="font-size:0.65rem;opacity:0.8">Pendapatan</div></div>
+          </div>
+        </div>
+        <div class="row-between" style="margin-bottom:0.75rem">
+          <div class="section-title" style="margin:0">Tugas Tersedia</div>
+          <button class="text-link" onclick="showToast('Diperbarui!')">🔄 Perbarui</button>
+        </div>
+        <div class="card">
+          <div class="row-between">
+            <span style="font-weight:600;font-size:0.85rem">#ORD-240501-001</span>
+            <span class="badge badge-blue">Pickup</span>
+          </div>
+          <div style="margin-top:0.6rem">
+            <div style="font-weight:600">Budi Santoso</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">📍 Jl. Sukajadi No. 123, Bandung</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">🧺 Cuci Kering Express • 8 kg</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-top:0.4rem">
+              <span style="font-size:0.75rem;color:var(--text-muted)">📍 1.2 km • ⏱ 15 mnt</span>
+            </div>
+          </div>
+          <button class="btn btn-primary" onclick="showPage('driver-detail')">Terima Tugas</button>
+        </div>
+        <div class="card" style="opacity:0.75">
+          <div class="row-between">
+            <span style="font-weight:600;font-size:0.85rem">#ORD-240501-002</span>
+            <span class="badge badge-blue">Pickup</span>
+          </div>
+          <div style="margin-top:0.6rem">
+            <div style="font-weight:600">Siti Aisyah</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">📍 Jl. Setiabudi No. 45, Bandung</div>
+            <div style="font-size:0.78rem;color:var(--text-muted)">🧺 Cuci Kering Express • 6 kg</div>
+            <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.3rem">📍 2.1 km • ⏱ 20 mnt</div>
+          </div>
+          <button class="btn btn-outline" onclick="showToast('Tugas diterima!')">Terima Tugas</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="driver-detail" class="hidden">
+      <div class="page-content">
+        <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+          <span class="badge badge-blue" style="font-size:0.8rem;padding:0.4rem 0.8rem">Pickup</span>
+          <span style="font-size:0.8rem;font-weight:600;padding:0.4rem 0">#ORD-240501-001</span>
+        </div>
+        <div class="card">
+          <div class="section-title">Informasi Pelanggan</div>
+          <div class="fee-row"><span style="color:var(--text-muted)">👤 Nama</span><span style="font-weight:600">Budi Santoso</span></div>
+          <div class="fee-row"><span style="color:var(--text-muted)">📞 HP</span><span>0812-3456-7890</span></div>
+          <div class="fee-row"><span style="color:var(--text-muted)">📍 Alamat</span><span style="max-width:160px;text-align:right;font-size:0.8rem">Jl. Sukajadi No. 123, Bandung</span></div>
+          <div class="fee-row"><span style="color:var(--text-muted)">📝 Catatan</span><span style="font-size:0.8rem">Rumah warna putih</span></div>
+        </div>
+        <div class="card">
+          <div class="section-title">Informasi Layanan</div>
+          <div class="fee-row"><span>Layanan</span><span>Cuci Kering Express</span></div>
+          <div class="fee-row"><span>Berat Cucian</span><span>8 kg</span></div>
+          <div class="fee-row"><span>Estimasi Selesai</span><span>±1 Jam</span></div>
+        </div>
+        <div class="map-placeholder">
+          <div class="map-grid" style="background-image:repeating-linear-gradient(0deg,#1a56db 0,#1a56db 1px,transparent 0,transparent 30px),repeating-linear-gradient(90deg,#1a56db 0,#1a56db 1px,transparent 0,transparent 30px)"></div>
+          <div style="position:relative;text-align:center">
+            <div style="font-size:2rem">📍</div>
+            <div>1.2 km dari lokasi Anda</div>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="showPage('driver-bukti')">▶ Mulai Pickup</button>
+        <button class="btn btn-outline" onclick="showToast('Pakaian diambil!')">✅ Pakaian Sudah Diambil</button>
+      </div>
+    </div>
+
+    <div id="driver-bukti" class="hidden">
+      <div class="page-content">
+        <div style="background:var(--green-light);border-radius:12px;padding:1rem;margin-bottom:1rem;text-align:center;color:var(--green);font-weight:600">
+          ✅ Pakaian telah diambil
+        </div>
+        <div class="card">
+          <div class="section-title">Foto Bukti Pengambilan</div>
+          <div style="border:2px dashed var(--gray-border);border-radius:12px;padding:2rem;text-align:center;cursor:pointer;color:var(--text-muted)" onclick="showToast('Fitur kamera aktif!')">
+            <div style="font-size:2.5rem">📷</div>
+            <div style="font-size:0.85rem;margin-top:0.4rem">Upload Foto</div>
+            <div style="font-size:0.72rem;margin-top:0.2rem">Format: JPG, PNG (Maks. 5MB)</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="section-title">Informasi Penerima</div>
+          <div class="form-group"><label class="form-label">Nama Penerima</label><input class="form-input" value="Budi Santoso"></div>
+          <div class="form-group"><label class="form-label">Nomor HP</label><input class="form-input" value="0812-3456-7890"></div>
+          <div class="form-group"><label class="form-label">Catatan (Opsional)</label><input class="form-input" placeholder="Catatan pengambilan..."></div>
+        </div>
+        <button class="btn btn-primary" onclick="showToast('Tugas selesai! 🎉');showPage('driver-dashboard')">✅ Selesaikan Tugas</button>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-item active" onclick="showPage('driver-dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Beranda
+      </button>
+      <button class="nav-item" onclick="showToast('Riwayat tugas')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        Tugas
+      </button>
+      <button class="nav-item" onclick="showToast('Earnings')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Earnings
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Akun
+      </button>
+    </div>
+  </div>
+
+  <!-- MITRA PAGES -->
+  <div id="mitra-app" class="hidden">
+    <div id="mitra-dashboard" class="hidden">
+      <div class="page-content">
+        <div class="card" style="background:linear-gradient(135deg,#0f6e56,#1d9e75);color:#fff">
+          <div class="row-between">
+            <div>
+              <div style="font-size:0.8rem;opacity:0.8">Smart Laundry</div>
+              <div style="font-size:1rem;font-weight:700">JL. Sukajadi No. 123</div>
+            </div>
+            <span style="background:rgba(255,255,255,0.25);padding:0.3rem 0.7rem;border-radius:20px;font-size:0.75rem">● Online</span>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0.5rem;margin-top:1rem;text-align:center">
+            <div><div style="font-size:1.3rem;font-weight:700">12</div><div style="font-size:0.6rem;opacity:0.8">Pesanan</div></div>
+            <div><div style="font-size:1.3rem;font-weight:700">4</div><div style="font-size:0.6rem;opacity:0.8">Diproses</div></div>
+            <div><div style="font-size:1.3rem;font-weight:700">25</div><div style="font-size:0.6rem;opacity:0.8">Selesai</div></div>
+            <div><div style="font-size:1rem;font-weight:700">Rp1.25Jt</div><div style="font-size:0.6rem;opacity:0.8">Pendapatan</div></div>
+          </div>
+        </div>
+        <div class="row-between" style="margin-bottom:0.75rem">
+          <div class="section-title" style="margin:0">Pesanan Masuk</div>
+          <button class="text-link">Lihat Semua</button>
+        </div>
+        <div class="card" onclick="showPage('mitra-proses')" style="cursor:pointer">
+          <div class="row-between">
+            <span style="font-weight:700;font-size:0.85rem">#SLX-250501-001</span>
+            <span class="badge badge-orange">Baru Masuk</span>
+          </div>
+          <div style="font-size:0.8rem;margin-top:0.4rem">Rina Andini • 8 kg • Cuci Kering Express</div>
+          <div style="font-size:0.75rem;color:var(--text-muted)">📍 Jl. Melati No. 10, Bandung</div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">10:15</div>
+        </div>
+        <div class="card">
+          <div class="row-between">
+            <span style="font-weight:700;font-size:0.85rem">#SLX-250501-002</span>
+            <span class="badge badge-orange">Baru Masuk</span>
+          </div>
+          <div style="font-size:0.8rem;margin-top:0.4rem">Dedi Kurniawan • 6 kg • Cuci Kering + Setrika</div>
+          <div style="font-size:0.72rem;color:var(--text-muted)">10:20</div>
+        </div>
+        <div class="section-title" style="margin-top:0.5rem">Sedang Diproses</div>
+        <div class="card">
+          <div class="row-between">
+            <span style="font-weight:700;font-size:0.85rem">#SLX-250430-089</span>
+            <span class="badge badge-blue">Sedang Diproses</span>
+          </div>
+          <div style="font-size:0.8rem;margin-top:0.4rem">Budi Santoso • 4 kg • Cuci Kering + Setrika</div>
+          <div style="margin-top:0.5rem">
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--text-muted);margin-bottom:0.3rem"><span>Progress</span><span>Sedang Dicuci</span></div>
+            <div class="progress-bar-bg"><div class="progress-bar-fill" style="width:50%"></div></div>
+          </div>
+          <div style="display:flex;gap:0.5rem;margin-top:0.6rem">
+            <button class="btn btn-outline btn-sm" onclick="showPage('mitra-proses')">Detail</button>
+            <button class="btn btn-primary btn-sm" onclick="showToast('Status diperbarui!')">Update Status</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mitra-proses" class="hidden">
+      <div class="page-content">
+        <div class="card">
+          <div class="row-between">
+            <div class="card-title">Detail Pesanan</div>
+            <span class="badge badge-orange">Baru Masuk</span>
+          </div>
+          <div class="divider"></div>
+          <div class="fee-row"><span>👤 Pelanggan</span><span>Rina Andini</span></div>
+          <div class="fee-row"><span>🧺 Layanan</span><span>Cuci Kering Express</span></div>
+          <div class="fee-row"><span>⚖️ Berat Pesanan</span><span>8 kg</span></div>
+          <div class="fee-row"><span>🧴 Add-on</span><span>Sabun Laundry + Pewangi</span></div>
+          <div class="fee-row"><span>📝 Catatan</span><span style="font-size:0.78rem;text-align:right;max-width:160px">Jangan dijemur di bawah sinar matahari</span></div>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:0.75rem">Timbang Pakaian</div>
+          <div style="display:flex;gap:1rem;align-items:center">
+            <div style="text-align:center;background:var(--gray-light);border-radius:10px;padding:0.75rem;flex:1">
+              <div style="font-size:0.75rem;color:var(--text-muted)">Berat Pesanan</div>
+              <div style="font-size:1.5rem;font-weight:700">8 kg</div>
+            </div>
+            <div style="font-size:1.3rem;color:var(--text-muted)">→</div>
+            <div style="text-align:center;background:var(--orange-light);border-radius:10px;padding:0.75rem;flex:1">
+              <div style="font-size:0.75rem;color:var(--orange)">Berat Aktual</div>
+              <div style="font-size:1.5rem;font-weight:700;color:var(--orange)">10.5 kg</div>
+            </div>
+          </div>
+          <div style="background:var(--orange-light);border-radius:10px;padding:0.75rem;margin-top:0.75rem;font-size:0.82rem;color:var(--orange)">
+            ⚠️ Berat aktual melebihi 8 kg. Akan dikenakan biaya tambahan 2.5 kg × Rp10.000 = <strong>Rp25.000</strong>
+          </div>
+          <button class="btn btn-primary" onclick="showToast('Biaya tambahan dikirim ke pelanggan!')">📤 Ajukan Tambahan Biaya</button>
+        </div>
+        <div class="card">
+          <div class="card-title" style="margin-bottom:0.75rem">Update Status</div>
+          <div style="display:flex;flex-direction:column;gap:0.5rem">
+            <button onclick="updateStatus(this,'Pakaian Diterima')" class="status-btn btn btn-outline" style="text-align:left;justify-content:flex-start;border-color:var(--green);color:var(--green)">✅ Pakaian Diterima</button>
+            <button onclick="updateStatus(this,'Sedang Dicuci')" class="status-btn btn btn-outline" style="text-align:left">🫧 Sedang Dicuci</button>
+            <button onclick="updateStatus(this,'Sedang Dikeringkan')" class="status-btn btn btn-outline" style="text-align:left">💨 Sedang Dikeringkan</button>
+            <button onclick="updateStatus(this,'Laundry Selesai')" class="status-btn btn btn-outline" style="text-align:left">✨ Laundry Selesai</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-nav">
+      <button class="nav-item active" onclick="showPage('mitra-dashboard')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        Dashboard
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="2"/></svg>
+        Pesanan
+      </button>
+      <button class="nav-item" onclick="showToast('Tambah layanan')">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        Tambah
+      </button>
+      <button class="nav-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Akun
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
