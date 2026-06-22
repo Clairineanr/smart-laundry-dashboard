@@ -78,36 +78,9 @@ smartlaundry-vercel/
 
 ---
 
-## 🚀 Menjalankan Project Secara Lokal
+## 🚀 Link Project
 
-### Opsi 1 - Live Server (VS Code)
-
-1. Install extension **Live Server**
-2. Klik kanan `index.html`
-3. Pilih **Open with Live Server**
-
-### Opsi 2 - Local HTTP Server
-
-```bash
-python -m http.server 8000
-```
-
-Buka browser:
-
-```text
-http://localhost:8000
-```
-
----
-
-## 🌐 Deployment ke Vercel
-
-1. Push project ke GitHub
-2. Login ke Vercel
-3. Import repository GitHub
-4. Klik Deploy
-
-Karena project ini merupakan static website, tidak diperlukan build command ataupun package.json.
+https://smart-laundry-dashboard-zvlr.vercel.app/
 
 ---
 
