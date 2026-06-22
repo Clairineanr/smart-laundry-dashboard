@@ -80,7 +80,7 @@ smartlaundry-vercel/
 
 ## 🚀 Link Project
 
-https://smart-laundry-dashboard-zvlr.vercel.app/
+https://smart-laundry-dashboard-wine.vercel.app/
 
 ---
 
