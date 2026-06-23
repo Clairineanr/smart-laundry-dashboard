@@ -1,36 +1,102 @@
-
-let currentRole = null;
+let selectedRole = null;
 
 function openRole(role) {
-  currentRole = role;
+  selectedRole = role;
+
   document.getElementById('role-selector').style.display = 'none';
-  document.getElementById('app').style.display = 'block';
-  const labels = {customer:'👤 Pengguna',admin:'🛡️ Admin',driver:'🛵 Driver',mitra:'🏪 Mitra'};
-  const titles = {customer:'Smart Laundry',admin:'Admin Panel',driver:'Driver App',mitra:'Mitra Laundry'};
-  document.getElementById('role-label').textContent = labels[role];
-  document.getElementById('app-title').textContent = titles[role];
-  document.querySelectorAll('#app > div > div').forEach(el=>el.classList.add('hidden'));
-  if(role==='customer'){
-    document.getElementById('customer-app').classList.remove('hidden');
-    showCustPage('home');
-  } else if(role==='admin'){
-    document.getElementById('admin-app').classList.remove('hidden');
-    document.getElementById('admin-dashboard').classList.remove('hidden');
-  } else if(role==='driver'){
-    document.getElementById('driver-app').classList.remove('hidden');
-    showPage('driver-dashboard');
-  } else if(role==='mitra'){
-    document.getElementById('mitra-app').classList.remove('hidden');
-    showPage('mitra-dashboard');
-  }
+
+  const loginScreen = document.getElementById('login-screen');
+  loginScreen.classList.remove('hidden');
+  loginScreen.style.display = 'flex';
+  loginScreen.style.flexDirection = 'column';
+  loginScreen.style.justifyContent = 'center';
+  loginScreen.style.minHeight = '100vh';
 }
 
 function goBack() {
+
+  document.getElementById('login-screen').classList.add('hidden');
+
   document.getElementById('role-selector').style.display = 'flex';
+
   document.getElementById('app').style.display = 'none';
-  ['customer-app','admin-app','driver-app','mitra-app'].forEach(id=>{
+
+  [
+    'customer-app',
+    'admin-app',
+    'driver-app',
+    'mitra-app'
+  ].forEach(id=>{
     document.getElementById(id).classList.add('hidden');
   });
+
+  selectedRole = null;
+}
+
+function backToRoleSelector() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('role-selector').style.display = 'flex';
+}
+
+function loginRole() {
+
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value.trim();
+
+  if (!email || !password) {
+    showToast('Isi email dan password');
+    return;
+  }
+
+  document.getElementById('login-screen').classList.add('hidden');
+
+  const role = selectedRole;
+
+  currentRole = role;
+
+  document.getElementById('app').style.display = 'block';
+
+  const labels = {
+    customer:'👤 Pengguna',
+    admin:'🛡️ Admin',
+    driver:'🛵 Driver',
+    mitra:'🏪 Mitra'
+  };
+
+  const titles = {
+    customer:'Smart Laundry',
+    admin:'Admin Panel',
+    driver:'Driver App',
+    mitra:'Mitra Laundry'
+  };
+
+  document.getElementById('role-label').textContent = labels[role];
+  document.getElementById('app-title').textContent = titles[role];
+
+  document.querySelectorAll('#app > div > div')
+    .forEach(el => el.classList.add('hidden'));
+
+  if(role === 'customer'){
+      document.getElementById('customer-app').classList.remove('hidden');
+      showCustPage('home');
+  }
+
+  if(role === 'admin'){
+      document.getElementById('admin-app').classList.remove('hidden');
+      document.getElementById('admin-dashboard').classList.remove('hidden');
+  }
+
+  if(role === 'driver'){
+      document.getElementById('driver-app').classList.remove('hidden');
+      showPage('driver-dashboard');
+  }
+
+  if(role === 'mitra'){
+      document.getElementById('mitra-app').classList.remove('hidden');
+      showPage('mitra-dashboard');
+  }
+
+  showToast('Login berhasil');
 }
 
 function showPage(id) {

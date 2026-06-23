@@ -8,6 +8,44 @@
 </head>
 <body>
 
+<div id="login-screen" class="hidden">
+  <div class="brand">
+    <div class="brand-icon">🧺</div>
+    <h1>Smart Laundry Express</h1>
+    <p>Masuk ke akun Anda</p>
+  </div>
+
+  <div style="max-width:420px;width:100%;margin:auto;padding:20px">
+    <input
+      id="login-email"
+      class="form-input"
+      type="email"
+      placeholder="Email"
+      style="margin-bottom:10px"
+    >
+
+    <input
+      id="login-password"
+      class="form-input"
+      type="password"
+      placeholder="Password"
+      style="margin-bottom:15px"
+    >
+
+    <button class="btn btn-primary" onclick="loginRole()">
+      Login
+    </button>
+
+    <button
+      class="btn btn-outline"
+      onclick="backToRoleSelector()"
+      style="margin-top:10px"
+    >
+      Kembali
+    </button>
+  </div>
+</div>
+
 <!-- ROLE SELECTOR -->
 <div id="role-selector">
   <div class="brand">
