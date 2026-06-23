@@ -1,108 +1,58 @@
 # 🧺 Smart Laundry Express
 
-Smart Laundry Express adalah prototype aplikasi layanan laundry digital berbasis web yang menghubungkan pelanggan, mitra laundry, driver, dan admin dalam satu platform terintegrasi.
+Smart Laundry Express adalah prototype aplikasi layanan laundry digital berbasis web yang menghubungkan pelanggan, mitra laundry, driver, dan admin dalam satu platform.
 
-## 📌 Deskripsi
-
-Aplikasi ini dirancang untuk memudahkan proses pemesanan laundry secara online dengan fitur:
-
-* Pemesanan laundry online
-* Pickup & Delivery
-* Tracking status pesanan
-* Pembayaran QRIS
-* Chat pelanggan dan driver
-* Dashboard admin
-* Dashboard mitra laundry
-* Dashboard driver
-
-Prototype ini dibuat menggunakan teknologi web sederhana sehingga dapat diakses langsung melalui browser tanpa instalasi tambahan.
-
----
-
-## 👥 Role Pengguna
+## ✨ Fitur
 
 ### 👤 Customer
-
-* Melihat laundry terdekat
-* Membuat pesanan
-* Checkout dan pembayaran QRIS
-* Melacak status pesanan
-* Chat dengan driver
-* Memberikan rating dan review
-
-### 🛡️ Admin
-
-* Monitoring pengguna
-* Monitoring pesanan
-* Kelola komplain
-* Dashboard statistik
-* Laporan operasional
+- Membuat pesanan laundry
+- Pickup & Delivery
+- Pembayaran QRIS
+- Tracking status pesanan
+- Chat dengan driver
+- Rating dan review
 
 ### 🛵 Driver
-
-* Melihat tugas pickup
-* Detail pelanggan
-* Upload bukti pengambilan
-* Menyelesaikan tugas pengiriman
+- Melihat tugas pickup
+- Detail pelanggan
+- Upload bukti pengambilan
+- Menyelesaikan pengiriman
 
 ### 🏪 Mitra Laundry
+- Menerima pesanan
+- Menimbang pakaian
+- Mengelola proses laundry
+- Update status pesanan
 
-* Menerima pesanan
-* Menimbang pakaian
-* Mengelola proses laundry
-* Memperbarui status pesanan
-
----
+### 🛡️ Admin
+- Monitoring pengguna
+- Monitoring pesanan
+- Kelola komplain
+- Dashboard statistik
 
 ## 🛠️ Tech Stack
 
-* HTML5
-* CSS3
-* JavaScript (Vanilla JS)
-* Vercel Deployment
+- HTML5
+- CSS3
+- JavaScript (Vanilla JS)
+- Vercel
 
----
-
-## 📂 Struktur Project
-
-```text
-smartlaundry-vercel/
-│
-├── index.html
-├── css/
-│   └── style.css
-├── js/
-│   └── main.js
-└── vercel.json
-```
-
----
-
-## 🚀 Link Project
+## 🚀 Demo
 
 https://smart-laundry-dashboard-wine.vercel.app/
 
----
+## 📚 Tentang Project
 
-## 🎯 Fitur Utama
+Project ini dikembangkan sebagai tugas perkuliahan untuk mensimulasikan sistem layanan laundry digital dengan empat role utama: customer, driver, mitra laundry, dan admin.
 
-* Multi-role simulation
-* Responsive mobile layout
-* QRIS payment simulation
-* Order tracking simulation
-* Driver management simulation
-* Laundry partner dashboard
-* Admin monitoring dashboard
+## 👥 Tim
 
----
-
-## 📚 Tujuan Pengembangan
-
-Project ini dikembangkan sebagai bagian dari tugas mata kuliah dan simulasi sistem informasi laundry modern yang mengintegrasikan pelanggan, driver, mitra laundry, dan administrator dalam satu platform digital.
-
----
+- Gracella Mangalik
+- Clairine Anargya Athallah
+- Retno Eka Sari
+- Novena Aurelia Luisma
+- Talitha Shafa Azzahra
 
 ## 📄 License
 
-This project is created for educational and academic purposes.
-© 2026 Smart Laundry Express Team
+For educational and academic purposes.
