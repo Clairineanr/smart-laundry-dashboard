@@ -1,36 +1,84 @@
+let pageHistory = [];
+let previousPage = null;
 let selectedRole = null;
+let currentRole = null;
 
 function openRole(role) {
-  selectedRole = role;
 
-  document.getElementById('role-selector').style.display = 'none';
+    selectedRole = role;
 
-  const loginScreen = document.getElementById('login-screen');
-  loginScreen.classList.remove('hidden');
-  loginScreen.style.display = 'flex';
-  loginScreen.style.flexDirection = 'column';
-  loginScreen.style.justifyContent = 'center';
-  loginScreen.style.minHeight = '100vh';
+    document.getElementById('role-selector').style.display = 'none';
+    document.getElementById('login-screen').classList.remove('hidden');
+
+    const emailInput = document.getElementById('login-email');
+
+    if(role === 'customer'){
+        emailInput.value = 'user@smartlaundry.com';
+    }
+
+    if(role === 'admin'){
+        emailInput.value = 'admin@smartlaundry.com';
+    }
+
+    if(role === 'driver'){
+        emailInput.value = 'driver@smartlaundry.com';
+    }
+
+    if(role === 'mitra'){
+        emailInput.value = 'mitra@smartlaundry.com';
+    }
+
+    document.getElementById('login-password').value = '123456';
 }
 
-function goBack() {
+function showPage(id) {
 
-  document.getElementById('login-screen').classList.add('hidden');
+  const currentPage =
+    document.querySelector(
+      '#customer-app > div:not(.hidden), #admin-app > div:not(.hidden), #driver-app > div:not(.hidden), #mitra-app > div:not(.hidden)'
+    );
 
-  document.getElementById('role-selector').style.display = 'flex';
+  if(currentPage && currentPage.id !== id){
+      pageHistory.push(currentPage.id);
+  }
 
-  document.getElementById('app').style.display = 'none';
+  const parent = document.getElementById(id).closest(
+    '#customer-app,#admin-app,#driver-app,#mitra-app'
+  );
 
-  [
-    'customer-app',
-    'admin-app',
-    'driver-app',
-    'mitra-app'
-  ].forEach(id=>{
-    document.getElementById(id).classList.add('hidden');
-  });
+  if(parent){
+      parent.querySelectorAll(':scope > div').forEach(el=>{
+          if(
+              !el.classList.contains('bottom-nav') &&
+              !el.id.includes('nav')
+          ){
+              el.classList.add('hidden');
+          }
+      });
+  }
 
-  selectedRole = null;
+  document.getElementById(id).classList.remove('hidden');
+}
+
+function goBackPage() {
+
+  if(pageHistory.length === 0){
+
+      document.getElementById('customer-app').classList.add('hidden');
+      document.getElementById('admin-app').classList.add('hidden');
+      document.getElementById('driver-app').classList.add('hidden');
+      document.getElementById('mitra-app').classList.add('hidden');
+
+      document.querySelector('.app-header').classList.add('hidden');
+
+      document.getElementById('role-selector').style.display = 'flex';
+
+      return;
+  }
+
+  const previous = pageHistory.pop();
+
+  showPageWithoutHistory(previous);
 }
 
 function backToRoleSelector() {
@@ -50,11 +98,10 @@ function loginRole() {
 
   document.getElementById('login-screen').classList.add('hidden');
 
-  const role = selectedRole;
+  currentRole = selectedRole;
+  pageHistory = [];
 
-  currentRole = role;
-
-  document.getElementById('app').style.display = 'block';
+  document.querySelector('.app-header').classList.remove('hidden');
 
   const labels = {
     customer:'👤 Pengguna',
@@ -70,43 +117,35 @@ function loginRole() {
     mitra:'Mitra Laundry'
   };
 
-  document.getElementById('role-label').textContent = labels[role];
-  document.getElementById('app-title').textContent = titles[role];
+  document.getElementById('role-label').textContent = labels[selectedRole];
+  document.getElementById('app-title').textContent = titles[selectedRole];
 
-  document.querySelectorAll('#app > div > div')
-    .forEach(el => el.classList.add('hidden'));
+  document.getElementById('customer-app').classList.add('hidden');
+  document.getElementById('admin-app').classList.add('hidden');
+  document.getElementById('driver-app').classList.add('hidden');
+  document.getElementById('mitra-app').classList.add('hidden');
 
-  if(role === 'customer'){
+  if(selectedRole === 'customer'){
       document.getElementById('customer-app').classList.remove('hidden');
       showCustPage('home');
   }
 
-  if(role === 'admin'){
+  if(selectedRole === 'admin'){
       document.getElementById('admin-app').classList.remove('hidden');
       document.getElementById('admin-dashboard').classList.remove('hidden');
   }
 
-  if(role === 'driver'){
+  if(selectedRole === 'driver'){
       document.getElementById('driver-app').classList.remove('hidden');
       showPage('driver-dashboard');
   }
 
-  if(role === 'mitra'){
+  if(selectedRole === 'mitra'){
       document.getElementById('mitra-app').classList.remove('hidden');
       showPage('mitra-dashboard');
   }
 
   showToast('Login berhasil');
-}
-
-function showPage(id) {
-  const parent = document.getElementById(id).closest('#customer-app,#admin-app,#driver-app,#mitra-app');
-  if(parent) {
-    parent.querySelectorAll(':scope > div').forEach(el=>{
-      if(!el.classList.contains('bottom-nav')&&!el.id.includes('nav')) el.classList.add('hidden');
-    });
-  }
-  document.getElementById(id).classList.remove('hidden');
 }
 
 function showCustPage(page) {
@@ -185,3 +224,33 @@ setTimeout(()=>{
     b.style.transition = 'height 0.8s ease '+i*0.1+'s';
   });
 },100);
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelector('.app-header').classList.add('hidden');
+
+  document.getElementById('role-selector').style.display = 'flex';
+
+  document.getElementById('login-screen').classList.add('hidden');
+
+});
+
+function showPageWithoutHistory(id){
+
+  const parent = document.getElementById(id).closest(
+    '#customer-app,#admin-app,#driver-app,#mitra-app'
+  );
+
+  if(parent){
+      parent.querySelectorAll(':scope > div').forEach(el=>{
+          if(
+              !el.classList.contains('bottom-nav') &&
+              !el.id.includes('nav')
+          ){
+              el.classList.add('hidden');
+          }
+      });
+  }
+
+  document.getElementById(id).classList.remove('hidden');
+}

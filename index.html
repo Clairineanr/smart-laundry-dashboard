@@ -9,41 +9,46 @@
 <body>
 
 <div id="login-screen" class="hidden">
-  <div class="brand">
-    <div class="brand-icon">🧺</div>
-    <h1>Smart Laundry Express</h1>
-    <p>Masuk ke akun Anda</p>
-  </div>
 
-  <div style="max-width:420px;width:100%;margin:auto;padding:20px">
-    <input
-      id="login-email"
-      class="form-input"
-      type="email"
-      placeholder="Email"
-      style="margin-bottom:10px"
-    >
+    <div class="login-container">
 
-    <input
-      id="login-password"
-      class="form-input"
-      type="password"
-      placeholder="Password"
-      style="margin-bottom:15px"
-    >
+        <div class="brand">
+            <div class="brand-icon">🧺</div>
+            <h1>Smart Laundry Express</h1>
+            <p>Masuk ke akun Anda</p>
+        </div>
 
-    <button class="btn btn-primary" onclick="loginRole()">
-      Login
-    </button>
+        <div class="login-form">
 
-    <button
-      class="btn btn-outline"
-      onclick="backToRoleSelector()"
-      style="margin-top:10px"
-    >
-      Kembali
-    </button>
-  </div>
+            <input
+                id="login-email"
+                class="form-input"
+                type="email"
+                placeholder="Email"
+            >
+
+            <input
+                id="login-password"
+                class="form-input"
+                type="password"
+                placeholder="Password"
+            >
+
+            <button class="btn btn-primary" onclick="loginRole()">
+                Login
+            </button>
+
+            <button
+                class="btn btn-outline"
+                onclick="backToRoleSelector()"
+            >
+                Kembali
+            </button>
+
+        </div>
+
+    </div>
+
 </div>
 
 <!-- ROLE SELECTOR -->
@@ -78,12 +83,11 @@
 </div>
 
 <!-- APP SHELL -->
-<div id="app">
-  <div class="app-header">
-    <button class="btn-back" onclick="goBack()">← Ganti</button>
+<div class="app-header">
+    <button onclick="goBackPage()">← Kembali</button>
     <h2 id="app-title">Smart Laundry</h2>
     <span class="role-badge" id="role-label">-</span>
-  </div>
+</div>
 
   <!-- CUSTOMER PAGES -->
   <div id="customer-app" class="hidden">
