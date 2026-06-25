@@ -41,9 +41,11 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
     margin-top:0.3rem;
 }
 .role-grid{
-    display:grid;
-    grid-template-columns:repeat(2, 250px);
-    gap:1rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+    gap: 16px;
+    width: 100%;
+    max-width: 620px;
 }
 .role-card{
     background:#ffffff;
@@ -277,3 +279,23 @@ input:checked + .toggle-slider:before{transform:translateX(20px)}
 .login-form .btn{
     margin-top:10px;
 }
+
+@media (max-width:768px){
+
+    .role-grid{
+        grid-template-columns:repeat(2,1fr);
+        width:100%;
+    }
+
+    .role-card{
+        width:100%;
+        min-height:170px;
+    }
+
+    .brand h1{
+        font-size:2rem;
+    }
+
+    .brand p{
+        font-size:1rem;
+    }
